@@ -18,6 +18,7 @@
 	<modules>
 		<module>netty</module>
 		<module>socket</module>
+		<module>serialize</module>
 	</modules>
 
 	<properties>
