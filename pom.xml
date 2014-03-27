@@ -19,6 +19,7 @@
 		<module>netty</module>
 		<module>socket</module>
 		<module>serialize</module>
+		<module>thrift</module>
 	</modules>
 
 	<properties>
