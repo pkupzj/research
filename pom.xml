@@ -20,7 +20,8 @@
 		<module>socket</module>
 		<module>serialize</module>
 		<module>thrift</module>
-	</modules>
+        <module>mongodb</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
