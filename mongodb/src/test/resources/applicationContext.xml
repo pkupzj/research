@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context-2.5.xsd
+        ">
+
+    <context:component-scan base-package="com.zijian.research.mongodb"/>
+	<context:property-placeholder location="classpath:config.properties" />
+
+	<bean id="mongo" class="com.zijian.research.mongodb.MongoFactoryBean">
+		<property name="host" value="10.8.64.208" />
+		<property name="port" value="27017" />
+	</bean>
+
+	<bean id="morphia"
+		class="com.zijian.research.mongodb.morphia.MorphiaFactoryBean">
+		<!-- 指定要扫描的POJO包路径 -->
+		<property name="mapPackages">
+			<list>
+			<value>com.zijian.research.mongodb.morphia.model</value>
+			</list>
+		</property>
+
+		<!-- 指定要映射的类 -->
+		<!-- <property name="mapClasses"> <array> <value>me.watchzerg.test.morphia.pojo.Hotel</value> 
+			<value>me.watchzerg.test.morphia.pojo.Address</value> </array> </property> -->
+
+		<!-- 扫描包时是否忽略不可用的类，默认为false -->
+		<!-- <property name="ignoreInvalidClasses" value="false"/> -->
+	</bean>
+
+	<bean id="datastore"
+		class="com.zijian.research.mongodb.morphia.DatastoreFactoryBean">
+		<property name="morphia" ref="morphia" />
+		<property name="mongo" ref="mongo" />
+
+		<!-- collection的名称 -->
+		<property name="dbName" value="${mongoDB.dbName}" />
+
+		<!-- 是否进行index和caps的确认操作，默认为flase -->
+		<property name="toEnsureIndexes" value="true" />
+		<property name="toEnsureCaps" value="true" />
+	</bean>
+
+</beans>
